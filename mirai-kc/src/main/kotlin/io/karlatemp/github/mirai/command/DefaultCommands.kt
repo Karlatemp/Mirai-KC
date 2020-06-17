@@ -18,8 +18,8 @@ import java.util.*
 object DefaultCommands {
     fun registerDefaultCommands() {
         registerCommand(
-            "reload",
-            "command.reload"
+            name = "reload",
+            permission = "command.reload"
         ) { _: User, contact: Contact, _: MessageEvent, _: LinkedList<ArgumentToken> ->
             contact.sendMessage("Dropping commands...")
             Commands.commands.clear()
@@ -35,5 +35,9 @@ object DefaultCommands {
 
             contact.sendMessage("Reload finished.")
         }
+        registerCommand(
+            name = "perms",
+            command = Perms
+        )
     }
 }
