@@ -15,6 +15,7 @@ import io.karlatemp.github.mirai.permission.MiraiContextChecker
 import io.karlatemp.github.mirai.permission.PermissionManager
 import io.karlatemp.github.mirai.plugin.PluginManager
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.mamoe.mirai.event.subscribeAlways
@@ -59,10 +60,10 @@ object Bootstrap {
     )
 
     @JvmStatic
-    private val usersFolder: File
+    internal val usersFolder: File
 
     @JvmStatic
-    private val groupsFolder: File
+    internal val groupsFolder: File
 
     init {
         val permissionsFolder = File("data/perm")
@@ -73,6 +74,7 @@ object Bootstrap {
     }
 
     fun savePermissionManager() {
+        logger.log(Level.INFO, "Saving permission manager data.")
         try {
             permissionManager.saveData(usersFolder, groupsFolder)
         } catch (any: Throwable) {
@@ -81,6 +83,7 @@ object Bootstrap {
     }
 
     fun reloadPermissionManager() {
+        logger.log(Level.INFO, "Reloading permission manager data.")
         try {
             permissionManager.reload(usersFolder, groupsFolder)
         } catch (any: Throwable) {
@@ -96,15 +99,20 @@ object Bootstrap {
         reloadPermissionManager()
         PluginManager.reload()
         DefaultCommands.registerDefaultCommands()
-
+        scope.launch {
+            while (true) {
+                delay(1000L * 60 * 5)
+                savePermissionManager()
+            }
+        }
         scope.subscribeAlways<MessageEvent> {
             scope.launch {
+                val user = permissionManager.findUser(sender.id)
                 withContext(
                     MiraiContextChecker.newContext(
                         sender, subject, permissionManager
-                    )
+                    ) + user
                 ) {
-                    val user = permissionManager.findUser(sender.id)
                     val tokens = ArgumentParser.parse(message)
                     val first = tokens.poll() ?: return@withContext
                     val cmd = first.asString
