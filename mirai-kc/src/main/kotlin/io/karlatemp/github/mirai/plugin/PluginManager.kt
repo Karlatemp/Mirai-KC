@@ -39,9 +39,13 @@ object PluginManager {
 
     @JvmStatic
     fun reload() {
-        plugins.forEach {
-            it.onDisable()
-            it[Job]?.cancel()
+        plugins.forEach { pl ->
+            (pl.coroutineContext[Job] ?: run {
+                System.err.println("Job of $pl not found!")
+                return@forEach
+            }).also {
+                println("Cancelling $it")
+            }.cancel()
         }
         plugins.clear()
         pluginsFolder.mkdirs()
@@ -60,7 +64,11 @@ object PluginManager {
                             val ks = Class.forName(cname, false, loader)
                             if (MainPlugin::class.java.isAssignableFrom(ks)) {
                                 val pl = ks.instance as MainPlugin
-                                plugins.add(pl)
+                                plugins.add(pl.also { plugin ->
+                                    plugin.coroutineContext[Job]!!.invokeOnCompletion {
+                                        plugin.onDisable()
+                                    }
+                                })
                                 pl.onEnable()
                             }
                             if (AutoInitializer::class.java.isAssignableFrom(ks)) {
