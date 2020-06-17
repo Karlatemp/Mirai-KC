@@ -10,6 +10,7 @@ package io.karlatemp.github.mirai
 
 import io.karlatemp.github.mirai.command.ArgumentParser
 import io.karlatemp.github.mirai.command.Commands
+import io.karlatemp.github.mirai.command.DefaultCommands
 import io.karlatemp.github.mirai.permission.MiraiContextChecker
 import io.karlatemp.github.mirai.permission.PermissionManager
 import io.karlatemp.github.mirai.plugin.PluginManager
@@ -94,6 +95,8 @@ object Bootstrap {
         )
         reloadPermissionManager()
         PluginManager.reload()
+        DefaultCommands.registerDefaultCommands()
+
         scope.subscribeAlways<MessageEvent> {
             scope.launch {
                 withContext(
