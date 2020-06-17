@@ -1,9 +1,9 @@
 /*
  * Copyright (c) 2018-2020 Karlatemp. All rights reserved.
  * @author Karlatemp <karlatemp@vip.qq.com> <https://github.com/Karlatemp>
- * @create 2020/06/10 13:29:19
+ * @create 2020/06/17 21:34:56
  *
- * MiraiPlugins/MiraiBootstrap/Bootstrap.kt
+ * Mirai-KC/Mirai-KC.main/Bootstrap.kt
  */
 
 package io.karlatemp.github.mirai

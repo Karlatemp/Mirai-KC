@@ -1,9 +1,9 @@
 /*
  * Copyright (c) 2018-2020 Karlatemp. All rights reserved.
  * @author Karlatemp <karlatemp@vip.qq.com> <https://github.com/Karlatemp>
- * @create 2020/06/10 23:46:41
+ * @create 2020/06/17 21:34:56
  *
- * MiraiPlugins/MiraiBootstrap/TestConc.kt
+ * Mirai-KC/Mirai-KC.main/TestConc.kt
  */
 @file:Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 
