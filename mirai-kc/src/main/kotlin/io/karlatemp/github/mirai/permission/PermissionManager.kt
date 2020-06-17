@@ -12,7 +12,12 @@ import java.util.concurrent.ConcurrentLinkedQueue
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.coroutineContext
 
-interface Permissible {
+interface Permissible : CoroutineContext.Element {
+    companion object Key : CoroutineContext.Key<Permissible>
+
+    override val key: CoroutineContext.Key<Permissible>
+        get() = Key
+
     val isBanned: Boolean
 
     suspend fun hasPermission(permission: String): Boolean
@@ -33,14 +38,16 @@ abstract class PermissibleImpl : Permissible {
         if (status == PermissionStatus.ALLOWED) return true
         if (status == PermissionStatus.BLOCKED) return false
         if (permission == "*") return false
-        val lsp = permission.lastIndexOf('.', startIndex = if (permission.endsWith(".*")) {
-            permission.lastIndex - 2
-        } else {
-            val status0 = get("$permission.*")
-            if (status0 == PermissionStatus.ALLOWED) return true
-            if (status0 == PermissionStatus.BLOCKED) return false
-            permission.lastIndex
-        })
+        val lsp = permission.lastIndexOf(
+            '.', startIndex = if (permission.endsWith(".*")) {
+                permission.lastIndex - 2
+            } else {
+                val status0 = get("$permission.*")
+                if (status0 == PermissionStatus.ALLOWED) return true
+                if (status0 == PermissionStatus.BLOCKED) return false
+                permission.lastIndex
+            }
+        )
         return if (lsp == -1) {
             hasPermission0("*")
         } else {
@@ -50,14 +57,14 @@ abstract class PermissibleImpl : Permissible {
 
     internal abstract fun PermissionContext.get(permission: String): PermissionStatus
     internal fun accessGet(context: PermissionContext, permission: String): PermissionStatus =
-            context.get(permission)
+        context.get(permission)
 }
 
 
 class UserNode(
-        val nodes: ConcurrentLinkedQueue<PermNode>,
-        val groups: ConcurrentLinkedQueue<GroupSetNode>,
-        override var isBanned: Boolean
+    val nodes: ConcurrentLinkedQueue<PermNode>,
+    val groups: ConcurrentLinkedQueue<GroupSetNode>,
+    override var isBanned: Boolean
 ) : PermissibleImpl() {
 
     override fun PermissionContext.get(permission: String): PermissionStatus {
@@ -142,21 +149,32 @@ abstract class PermissionContext : CoroutineContext.Element {
 object StandardContext {
     val newStandardUser
         get() = UserNode(
-                ConcurrentLinkedQueue(),
-                ConcurrentLinkedQueue(listOf(
-                        GroupSetNode("default", mapOf()),
-                        GroupSetNode("group", mapOf(
-                                "context" to "group"
-                        )),
-                        GroupSetNode("group-admin", mapOf(
-                                "context" to "group",
-                                "level" to "admin"
-                        ))
-                )),
-                false
+            ConcurrentLinkedQueue(),
+            ConcurrentLinkedQueue(
+                listOf(
+                    GroupSetNode("default", mapOf()),
+                    GroupSetNode(
+                        "group", mapOf(
+                            "context" to "group"
+                        )
+                    ),
+                    GroupSetNode(
+                        "group-admin", mapOf(
+                            "context" to "group",
+                            "level" to "admin"
+                        )
+                    )
+                )
+            ),
+            false
         )
 
     @JvmStatic
     val standardUser = newStandardUser
 }
 
+suspend fun hasPermission(permission: String): Boolean {
+    return (coroutineContext[Permissible] ?: error("No Permissible")).hasPermission(permission)
+}
+
+suspend inline fun String.testPermission(): Boolean = hasPermission(this)
