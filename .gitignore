@@ -1,3 +1,8 @@
 /.idea
 /.gradle
 build/
+
+# Testing resources
+/plugins
+/data
+/device.json
