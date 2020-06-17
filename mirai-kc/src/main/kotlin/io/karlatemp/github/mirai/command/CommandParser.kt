@@ -15,8 +15,9 @@ import net.mamoe.mirai.message.data.PlainText
 import java.util.*
 
 open class ArgumentToken(
-        open val value: Any?
+    open val value: Any?
 ) {
+    open val asBoolean: Boolean get() = asString.toBoolean()
     open val asString: String get() = value.toString()
     open val asLong: Long get() = asString.toLongOrNull() ?: 0L
     open val asInt: Int get() = asString.toIntOrNull() ?: 0
@@ -26,7 +27,7 @@ open class ArgumentToken(
 }
 
 open class ArgumentAtToken(
-        private val at: At
+    private val at: At
 ) : ArgumentToken(at) {
     override val asString: String
         get() = at.contentToString()
@@ -41,7 +42,7 @@ open class ArgumentAtToken(
 }
 
 open class ArgumentImageToken(
-        override val value: Image
+    override val value: Image
 ) : ArgumentToken(value)
 
 
