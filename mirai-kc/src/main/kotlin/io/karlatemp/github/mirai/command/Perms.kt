@@ -217,6 +217,7 @@ object Perms : Command {
                                 if (userNode === StandardContext.standardUser) {
                                     append(" (Standard User)")
                                 }
+                                if (userNode.isBanned) append(" (Banned)")
 
                                 append("\nPermissions:\n")
                                 userNode.nodes.forEach { permissionNode ->
