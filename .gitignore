@@ -6,3 +6,4 @@ build/
 /plugins
 /data
 /device.json
+/logging.log
