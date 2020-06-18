@@ -18,12 +18,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import net.mamoe.mirai.Bot
 import net.mamoe.mirai.event.subscribeAlways
 import net.mamoe.mirai.message.MessageEvent
 import java.io.File
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicBoolean
 import java.util.logging.Level
+import kotlin.system.exitProcess
 
 @Suppress("MemberVisibilityCanBePrivate")
 object Bootstrap {
@@ -135,5 +138,23 @@ object Bootstrap {
                 }
             }
         }
+    }
+
+    private val shutdownHook = AtomicBoolean(false)
+    fun shutdown() {
+        if (!shutdownHook.compareAndSet(false, true)) return
+        logger.info("Shut downing")
+        savePermissionManager()
+        PluginManager.disableAll()
+        logger.info("Dropping all logon bots")
+        Bot.botInstancesSequence.forEach { bot ->
+            kotlin.runCatching {
+                bot.close()
+            }.onFailure {
+                logger.log(Level.WARNING, "Exception in closing ${bot.id}", it)
+            }
+        }
+        logger.info("Goodbye.")
+        exitProcess(0)
     }
 }

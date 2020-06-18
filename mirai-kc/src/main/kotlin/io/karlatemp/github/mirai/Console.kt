@@ -10,6 +10,7 @@ package io.karlatemp.github.mirai
 
 import io.karlatemp.github.mirai.command.ArgumentToken
 import io.karlatemp.github.mirai.command.Commands
+import io.karlatemp.github.mirai.logging.ConsoleSystem
 import io.karlatemp.github.mirai.permission.MiraiContextChecker
 import io.karlatemp.github.mirai.permission.Permissible
 import kotlinx.coroutines.CoroutineScope
@@ -26,8 +27,6 @@ import net.mamoe.mirai.message.MessageReceipt
 import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.utils.ExternalImage
 import net.mamoe.mirai.utils.currentTimeSeconds
-import java.io.InputStreamReader
-import java.nio.charset.Charset
 import java.util.*
 import kotlin.concurrent.thread
 import kotlin.coroutines.CoroutineContext
@@ -91,19 +90,9 @@ fun startupConsoleThread() {
         val scope = CoroutineScope(
             CoroutineThreadPool + contextChecker + ROOTPermissible
         )
-        val lineReader: () -> String? = if (jconsole != null) {
-            { jconsole.readLine("> ") }
-        } else {
-            // sun.stdout.encoding
-            val scanner = Scanner(InputStreamReader(System.`in`, findEncoding()))
-            ({
-                if (scanner.hasNextLine())
-                    scanner.nextLine()
-                else null
-            })
-        }
+        val lineReader = ConsoleSystem.lineReader
         while (true) {
-            val nextCommand = lineReader() ?: break
+            val nextCommand = lineReader(false) ?: break
             scope.launch { postCommand(nextCommand) }
         }
     }
@@ -136,16 +125,6 @@ class ConsoleMessage(message: String) : MessageEvent() {
         get() = ConsoleUser
     override val time: Int = currentTimeSeconds.toInt()
 
-}
-
-private fun findEncoding(): Charset {
-    runCatching {
-        return Charset.forName(System.getProperty("sun.stdout.encoding"))
-    }
-    runCatching {
-        return Charset.forName(System.getProperty("file.encoding"))
-    }
-    return Charsets.UTF_8
 }
 
 class ConsoleMessageEvent(val message: String) : AbstractEvent(), CancellableEvent

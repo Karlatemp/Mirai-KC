@@ -35,7 +35,7 @@ object PluginManager {
     private val pluginsFolder = File("plugins")
 
     @JvmStatic
-    fun reload() {
+    fun disableAll() {
         plugins.forEach { pl ->
             (pl.coroutineContext[Job] ?: run {
                 System.err.println("Job of $pl not found!")
@@ -45,6 +45,11 @@ object PluginManager {
             }.cancel()
         }
         plugins.clear()
+    }
+
+    @JvmStatic
+    fun reload() {
+        disableAll()
         pluginsFolder.mkdirs()
         pluginsFolder.listFiles { file -> file.isFile && file.extension == "jar" }?.forEach { it.load() }
     }

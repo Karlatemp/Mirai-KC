@@ -39,5 +39,13 @@ object DefaultCommands {
             name = "perm",
             command = Perms
         )
+        registerCommand(name = "shutdown", permission = "command.shutdown") { _, subject, _, args ->
+            if (args.poll()?.asString != "confirm") {
+                subject.sendMessage("Are you sure about that? Type `/shutdown confirm` to shutdown system.")
+                return@registerCommand
+            }
+            subject.sendMessage("System shut downing...")
+            Bootstrap.shutdown()
+        }
     }
 }

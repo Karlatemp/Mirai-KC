@@ -10,6 +10,7 @@ package io.karlatemp.github.mirai.logging
 
 import cn.mcres.karlatemp.mxlib.MXBukkitLib
 import cn.mcres.karlatemp.mxlib.logging.*
+import cn.mcres.karlatemp.mxlib.tools.EmptyStream
 import cn.mcres.karlatemp.mxlib.tools.InlinePrintStream
 import io.karlatemp.github.mirai.levelAll
 import io.karlatemp.github.mirai.logger
@@ -128,7 +129,7 @@ fun initializeLoggingSystem() {
     }
 
     val consoleLogger = object : PrintStreamLogger(
-        System.out,
+        ConsoleSystem,
         MessageFactoryAnsi(),
         object : AlignmentPrefixSupplier(
             PrefixSupplier { _: Boolean, _: String?, _: Level?, record: LogRecord? ->
@@ -164,14 +165,18 @@ fun initializeLoggingSystem() {
                     .a(super.get(error, line, level, record)).reset().toString()
             }
         },
-        System.out,
-        System.out
+        EmptyStream.stream.asPrintStream(),
+        EmptyStream.stream.asPrintStream()
     ) {
         override fun writeLine(pre: String?, message: String?, error: Boolean) {
             if (filter(dropper.matcher(message ?: return).replaceAll(""))) {
                 return
             }
-            super.writeLine(pre, message, error)
+            if (pre != null && pre.isNotEmpty()) {
+                ConsoleSystem.lineWriter(pre + message)
+            } else {
+                ConsoleSystem.lineWriter(message)
+            }
         }
     }
     MXBukkitLib.setLogger(AsyncLogger(
