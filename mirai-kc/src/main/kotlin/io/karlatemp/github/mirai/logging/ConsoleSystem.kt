@@ -36,7 +36,6 @@ object ConsoleSystem {
     init {
         if (System.getProperty("kc.no-jline") === null) {
             System.setProperty("kc.no-ansi", "")
-            println("Using JLine")
 
             val dumb = System.getProperty("java.class.path")
                 .contains("idea_rt.jar")
