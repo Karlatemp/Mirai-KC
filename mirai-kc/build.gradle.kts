@@ -13,8 +13,9 @@ repositories {
 }
 
 dependencies {
+    // # https://mvnrepository.com/artifact/org.fusesource.jansi/jansi
+    implementation("org.fusesource.jansi:jansi:1.18")
     // # https://mvnrepository.com/artifact/com.google.code.gson/gson
-    //'com.google.code.gson:gson:jar:2.8.6'
     implementation("com.google.code.gson:gson:2.8.6")
     implementation("net.mamoe:mirai-core:1.1-EA")
     implementation("net.mamoe:mirai-core-qqandroid:1.1-EA")
