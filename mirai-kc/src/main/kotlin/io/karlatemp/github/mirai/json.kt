@@ -19,7 +19,7 @@ annotation class JsonElementBuilderDsl
 open class JsonElementBuilder
 
 @JsonElementBuilderDsl
-open class JsonArrayBuilder(val array: JsonArray) : JsonElementBuilder(){
+open class JsonArrayBuilder(val array: JsonArray) : JsonElementBuilder() {
     @JsonElementBuilderDsl
     fun value(value: String) {
         value(JsonPrimitive(value))
@@ -36,7 +36,7 @@ open class JsonArrayBuilder(val array: JsonArray) : JsonElementBuilder(){
     }
 
     @JsonElementBuilderDsl
-   fun value(value: Char) {
+    fun value(value: Char) {
         value(JsonPrimitive(value))
     }
 
@@ -49,9 +49,10 @@ open class JsonArrayBuilder(val array: JsonArray) : JsonElementBuilder(){
     fun obj(value: JsonObjectBuilder.() -> Unit) {
         array.add(JsonObject().also { value(JsonObjectBuilder(it)) })
     }
+
     @JsonElementBuilderDsl
     fun array(value: JsonArrayBuilder.() -> Unit) {
-        array.add( JsonArray().also { value(JsonArrayBuilder(it)) })
+        array.add(JsonArray().also { value(JsonArrayBuilder(it)) })
     }
 }
 
@@ -86,8 +87,17 @@ open class JsonObjectBuilder(val obj: JsonObject) : JsonElementBuilder() {
     infix fun String.obj(value: JsonObjectBuilder.() -> Unit) {
         obj.add(this, JsonObject().also { value(JsonObjectBuilder(it)) })
     }
+
     @JsonElementBuilderDsl
     infix fun String.array(value: JsonArrayBuilder.() -> Unit) {
         obj.add(this, JsonArray().also { value(JsonArrayBuilder(it)) })
     }
+}
+
+fun JsonArray.build(invoke: JsonArrayBuilder.() -> Unit): JsonArray {
+    return JsonArrayBuilder(this).apply { invoke() }.array
+}
+
+fun JsonObject.build(invoke: JsonObjectBuilder.() -> Unit): JsonObject {
+    return JsonObjectBuilder(this).apply { invoke() }.obj
 }
