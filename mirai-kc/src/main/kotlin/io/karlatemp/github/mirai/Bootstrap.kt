@@ -118,7 +118,7 @@ object Bootstrap {
                     val cmd = first.asString
                     if (cmd.isNotEmpty()) {
                         if (allowedPrefix[cmd[0].toInt()]) {
-                            Commands.commands[cmd.substring(1)]?.also { command ->
+                            Commands.commands[cmd.substring(1).toLowerCase()]?.also { command ->
                                 if (user.isBanned) {
                                     subject.sendMessage("不可以!")
                                 } else {
