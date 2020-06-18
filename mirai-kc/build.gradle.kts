@@ -15,6 +15,8 @@ repositories {
 }
 
 dependencies {
+    // # https://mvnrepository.com/artifact/org.jline/jline
+    implementation("org.jline:jline:3.15.0")
     // # https://mvnrepository.com/artifact/org.fusesource.jansi/jansi
     implementation("org.fusesource.jansi:jansi:1.18")
     // # https://mvnrepository.com/artifact/com.google.code.gson/gson
