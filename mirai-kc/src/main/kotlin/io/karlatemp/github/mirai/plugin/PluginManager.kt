@@ -8,10 +8,7 @@
 
 package io.karlatemp.github.mirai.plugin
 
-import io.karlatemp.github.mirai.CoroutineThreadPool
-import io.karlatemp.github.mirai.getValue
-import io.karlatemp.github.mirai.instance
-import io.karlatemp.github.mirai.setValue
+import io.karlatemp.github.mirai.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import java.io.File
@@ -32,7 +29,7 @@ object PluginManager {
     val parent: ClassLoader? = PluginManager::class.java.classLoader
 
     @JvmStatic
-    private val logger: Logger = Logger.getLogger("Plugin Manager")
+    private val logger: Logger = "Plugin Manager".logger().levelAll()
 
     @JvmStatic
     private val pluginsFolder = File("plugins")
@@ -93,7 +90,7 @@ abstract class MainPlugin : CoroutineScope, CoroutineContext.Element {
         get() = Key
 
     private val delegate: CoroutineScope = CoroutineScope(CoroutineThreadPool + this)
-    val logger: Logger = Logger.getLogger(name)
+    val logger: Logger = name.logger()
 
     final override val coroutineContext: CoroutineContext
         get() = delegate.coroutineContext

@@ -12,10 +12,17 @@ import cn.mcres.karlatemp.mxlib.tools.Unsafe
 import cn.mcres.karlatemp.mxlib.tools.security.AccessToolkit
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
+import com.google.gson.JsonParser
+import com.google.gson.internal.Streams
+import com.google.gson.stream.JsonWriter
 import net.mamoe.mirai.utils.ContextImpl
 import net.mamoe.mirai.utils.DeviceInfo
 import net.mamoe.mirai.utils.DeviceInfoData
+import java.io.File
 import java.lang.reflect.Modifier
+import java.security.MessageDigest
+import java.util.logging.Level
+import java.util.logging.Logger
 import kotlin.reflect.KProperty
 
 operator fun <T> ThreadLocal<T>.getValue(from: Any, property: KProperty<*>): T = get()
@@ -133,3 +140,30 @@ fun DeviceInfo.toJsonElement() = JsonObject().also { obj ->
     }
 }
 
+fun File.readJson(): JsonElement = readBytes().inputStream()
+    .reader(Charsets.UTF_8).let { JsonParser.parseReader(it) }
+
+fun File.writeJson(element: JsonElement) {
+    JsonWriter(writer(Charsets.UTF_8).buffered(1024)).use { writer ->
+        writer.isLenient = true
+        writer.isHtmlSafe = false
+        writer.setIndent("  ")
+        Streams.write(element, writer)
+    }
+}
+
+fun String.logger(): Logger = Logger.getLogger(this)
+fun Logger.level(level: Level): Logger = also { this.level = level }
+fun Logger.levelAll(): Logger = level(Level.ALL)
+
+fun ByteArray.md5(): ByteArray {
+    return md5(data = this, offset = 0, length = size)
+}
+
+fun md5(data: ByteArray, offset: Int, length: Int): ByteArray {
+    return MessageDigest.getInstance("MD5").apply {
+        update(data, offset, length)
+    }.digest()
+}
+
+fun String.md5(): ByteArray = toByteArray(Charsets.UTF_8).md5()

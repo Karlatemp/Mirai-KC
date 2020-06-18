@@ -24,7 +24,6 @@ import java.io.File
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.logging.Level
-import java.util.logging.Logger
 
 @Suppress("MemberVisibilityCanBePrivate")
 object Bootstrap {
@@ -52,7 +51,7 @@ object Bootstrap {
     }
 
     @JvmStatic
-    val logger = Logger.getLogger("Bootstrap")
+    val logger = "Bootstrap".logger().levelAll()
 
     @JvmStatic
     val permissionManager = PermissionManager(

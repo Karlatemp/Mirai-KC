@@ -18,6 +18,9 @@ import net.mamoe.mirai.Bot
 import net.mamoe.mirai.contact.Contact
 import net.mamoe.mirai.contact.Friend
 import net.mamoe.mirai.contact.User
+import net.mamoe.mirai.event.AbstractEvent
+import net.mamoe.mirai.event.CancellableEvent
+import net.mamoe.mirai.event.broadcast
 import net.mamoe.mirai.message.MessageEvent
 import net.mamoe.mirai.message.MessageReceipt
 import net.mamoe.mirai.message.data.*
@@ -26,12 +29,11 @@ import net.mamoe.mirai.utils.currentTimeSeconds
 import java.io.InputStreamReader
 import java.nio.charset.Charset
 import java.util.*
-import java.util.logging.Logger
 import kotlin.concurrent.thread
 import kotlin.coroutines.CoroutineContext
 
 object ConsoleUser : User() {
-    private val console = Logger.getLogger("Console")
+    private val console = "Console".logger().levelAll()
     override val bot: Bot
         get() = TODO("No yet bot")
     override val coroutineContext: CoroutineContext
@@ -109,6 +111,7 @@ fun startupConsoleThread() {
 
 suspend fun postCommand(nextCommand: String) {
     if (nextCommand.isEmpty()) return
+    if (ConsoleMessageEvent(nextCommand).also { it.broadcast() }.isCancelled) return
     val arguments = LinkedList(
         nextCommand.split(' ').map { ArgumentToken(it) }
     )
@@ -144,3 +147,5 @@ private fun findEncoding(): Charset {
     }
     return Charsets.UTF_8
 }
+
+class ConsoleMessageEvent(val message: String) : AbstractEvent(), CancellableEvent

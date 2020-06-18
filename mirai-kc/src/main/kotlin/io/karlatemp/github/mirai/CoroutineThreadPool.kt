@@ -61,7 +61,7 @@ object CoroutineThreadPool : ExecutorCoroutineDispatcher(), Delay {
 
     @Suppress("NOTHING_TO_INLINE")
     private inline fun exportException(any: Throwable) {
-        Logger.getLogger(Thread.currentThread().name).log(Level.SEVERE, "Exception in Coroutine", any)
+        Thread.currentThread().name.logger().log(Level.SEVERE, "Exception in Coroutine", any)
     }
 
     override fun scheduleResumeAfterDelay(timeMillis: Long, continuation: CancellableContinuation<Unit>) {

@@ -11,6 +11,8 @@ package io.karlatemp.github.mirai.logging
 import cn.mcres.karlatemp.mxlib.MXBukkitLib
 import cn.mcres.karlatemp.mxlib.logging.*
 import cn.mcres.karlatemp.mxlib.tools.InlinePrintStream
+import io.karlatemp.github.mirai.levelAll
+import io.karlatemp.github.mirai.logger
 import net.mamoe.mirai.Bot
 import net.mamoe.mirai.utils.DefaultLogger
 import net.mamoe.mirai.utils.MiraiLogger
@@ -198,11 +200,11 @@ fun initializeLoggingSystem() {
         }
     }).also { handler = it })
     Thread.setDefaultUncaughtExceptionHandler { t: Thread, e: Throwable? ->
-        Logger.getLogger("Thread#" + t.name)
+        "Thread#${t.name}".logger()
             .log(Level.SEVERE, "An unknown error caused the thread to stop", e)
     }
     handler.level = Level.ALL
-    DefaultLogger = { name -> Logger.getLogger(name).also { it.level = Level.ALL }.toMirai(true) }
+    DefaultLogger = { name -> name.toString().logger().levelAll().toMirai(true) }
 }
 
 
@@ -237,7 +239,7 @@ fun Logger.toMirai(initialize: Boolean = false): MiraiLogger {
 }
 
 fun Bot.newLogger(): MiraiLogger {
-    val logger = Logger.getLogger("bot.$id")
+    val logger = "bot.$id".logger()
     loggerCreator?.invoke(logger, this)
     return logger.toMirai(initialize = false)
 }

@@ -8,14 +8,10 @@
 
 package io.karlatemp.github.mirai
 
-import com.google.gson.JsonParser
-import com.google.gson.internal.Streams
-import com.google.gson.stream.JsonWriter
 import io.karlatemp.github.mirai.logging.toMirai
 import net.mamoe.mirai.Bot
 import net.mamoe.mirai.utils.BotConfiguration
 import net.mamoe.mirai.utils.SystemDeviceInfo
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.logging.Logger
 
@@ -38,29 +34,19 @@ fun initializeBot(
 private val deviceInfoDir = File("data/devices")
 private fun BotConfiguration.initialize(qq: Long) {
     val lazy = lazy {
-        Logger.getLogger("bot.$qq").toMirai()
+        "bot.$qq".logger().toMirai()
     }
     this.networkLoggerSupplier = { lazy.value }
     this.deviceInfo
     val deviceInfoFile = File(deviceInfoDir, "$qq.json")
+    @Suppress("LiftReturnOrAssignment")
     if (deviceInfoFile.isFile) {
-        deviceInfo = deviceInfoFile.readBytes().inputStream().reader(Charsets.UTF_8).let { reader ->
-            JsonParser.parseReader(reader)
-        }.asJsonObject.toDeviceInfo().let { conf -> { conf } }
+        deviceInfo = deviceInfoFile.readJson()
+            .asJsonObject.toDeviceInfo().let { conf -> { conf } }
     } else {
         deviceInfo = SystemDeviceInfo().also { conf ->
             deviceInfoDir.mkdirs()
-            deviceInfoFile.writeBytes(
-                conf.toJsonElement().let { obj ->
-                    ByteArrayOutputStream().also { baos ->
-                        JsonWriter(baos.writer(Charsets.UTF_8)).use { jw ->
-                            jw.setIndent("  ")
-                            jw.isHtmlSafe = false
-                            Streams.write(obj, jw)
-                        }
-                    }.toByteArray()
-                }
-            )
+            deviceInfoFile.writeJson(conf.toJsonElement())
         }.let { conf -> { conf } }
     }
 }
