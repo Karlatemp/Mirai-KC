@@ -19,8 +19,10 @@ open class ArgumentToken(
 ) {
     open val asBoolean: Boolean get() = asString.toBoolean()
     open val asString: String get() = value.toString()
-    open val asLong: Long get() = asString.toLongOrNull() ?: 0L
-    open val asInt: Int get() = asString.toIntOrNull() ?: 0
+    open val asLong: Long? get() = asString.toLongOrNull()
+    open val asLongNotNull: Long get() = asLong ?: 0L
+    open val asInt: Int? get() = asString.toIntOrNull()
+    open val asIntNotNull: Int get() = asInt ?: 0
     override fun toString(): String {
         return "Token{$value}"
     }
@@ -35,6 +37,10 @@ open class ArgumentAtToken(
         get() = at.target
     override val asInt: Int
         get() = at.target.toInt()
+    override val asIntNotNull: Int
+        get() = at.target.toInt()
+    override val asLongNotNull: Long
+        get() = at.target
 
     override fun toString(): String {
         return "At{$at}"
@@ -81,6 +87,7 @@ object ArgumentParser {
 
     @JvmStatic
     fun <T : LinkedList<ArgumentToken>> parse(line: String, tokens: T): T {
+        @Suppress("NAME_SHADOWING") val line = line.trim()
         var start = 0
         do {
             val index = line.indexOf(' ', start)
