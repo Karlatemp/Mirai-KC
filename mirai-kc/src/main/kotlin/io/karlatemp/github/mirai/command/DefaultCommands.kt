@@ -36,7 +36,7 @@ object DefaultCommands {
             contact.sendMessage("Reload finished.")
         }
         registerCommand(
-            name = "perms",
+            name = "perm",
             command = Perms
         )
     }
