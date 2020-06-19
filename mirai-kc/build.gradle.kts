@@ -55,7 +55,7 @@ tasks {
 }
 
 tasks.withType(ShadowJar::class.java) {
-    this.archiveFileName.set("Mirai-KC-${project.version}.jar")
+    this.archiveFileName.set("Mirai-KC-${project.version}-shadow.jar")
     dependencies {
         exclude {
             when ("${it.moduleGroup}:${it.moduleName}") {
@@ -67,6 +67,8 @@ tasks.withType(ShadowJar::class.java) {
                 "org.bouncycastle:bcprov-jdk15on" -> true
                 else -> {
                     when (it.moduleGroup) {
+                        "org.jetbrains.kotlin" -> true
+                        "org.jetbrains.kotlinx" -> true
                         "io.ktor" -> true
                         else -> {
                             println("${it.moduleGroup}:${it.moduleName} ${it.moduleVersion}")

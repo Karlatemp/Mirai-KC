@@ -8,4 +8,5 @@
 
 shadowJar {
     exclude 'module-info.class'
+    exclude 'META-INF/*.kotlin_module'
 }

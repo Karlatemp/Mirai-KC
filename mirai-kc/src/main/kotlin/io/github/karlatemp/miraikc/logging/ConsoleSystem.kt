@@ -38,7 +38,7 @@ object ConsoleSystem {
             System.setProperty("kc.no-ansi", "")
 
             val dumb = System.getProperty("java.class.path")
-                .contains("idea_rt.jar")
+                .contains("idea_rt.jar") || System.getProperty("kc.idea") !== null
 
             val terminal = TerminalBuilder.builder()
                 .dumb(dumb)
