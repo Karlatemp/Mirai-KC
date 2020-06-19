@@ -43,9 +43,7 @@ object PluginManager {
             (pl.coroutineContext[Job] ?: run {
                 System.err.println("Job of $pl not found!")
                 return@forEach
-            }).also {
-                println("Cancelling $it")
-            }.cancel()
+            }).cancel()
         }
         plugins.clear()
     }
