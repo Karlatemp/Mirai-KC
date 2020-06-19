@@ -28,6 +28,7 @@ import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.utils.ExternalImage
 import net.mamoe.mirai.utils.currentTimeSeconds
 import java.util.*
+import java.util.logging.Level
 import kotlin.concurrent.thread
 import kotlin.coroutines.CoroutineContext
 
@@ -108,7 +109,11 @@ suspend fun postCommand(nextCommand: String) {
     if (c == null) {
         ConsoleUser.sendMessage("Command [$cmd] not found.")
     } else {
-        c.invoke(ConsoleUser, ConsoleUser, ConsoleMessage(nextCommand), arguments)
+        runCatching {
+            c.invoke(ConsoleUser, ConsoleUser, ConsoleMessage(nextCommand), arguments)
+        }.onFailure { exception ->
+            Bootstrap.logger.log(Level.SEVERE, "Exception in executing [$nextCommand]", exception)
+        }
     }
 }
 

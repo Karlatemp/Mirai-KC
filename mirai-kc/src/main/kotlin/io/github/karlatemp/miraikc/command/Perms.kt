@@ -341,7 +341,7 @@ object Perms : Command {
                 }
                 val perm = parsed.poll().asString
                 val value = parsed.poll().asBoolean
-                var permissionNode = nodes.first {
+                var permissionNode = nodes.firstOrNull {
                     it.key == perm
                 } ?: run {
                     PermNode(perm, value, mutableMapOf())
@@ -381,7 +381,7 @@ object Perms : Command {
                     subject.sendMessage(HELP_GROUP)
                     return
                 }
-                nodes.first { it.key == perm }?.also {
+                nodes.firstOrNull { it.key == perm }?.also {
                     nodes.remove(it)
                     subject.sendMessage("Successful remove node $perm")
                 } ?: run {

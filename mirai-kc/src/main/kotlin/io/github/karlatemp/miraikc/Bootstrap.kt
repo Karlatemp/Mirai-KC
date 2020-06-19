@@ -131,7 +131,12 @@ object Bootstrap {
                                         }
                                     }
                                 }
-                                command.invoke(sender, subject, this@subscribeAlways, tokens)
+                                kotlin.runCatching {
+                                    command.invoke(sender, subject, this@subscribeAlways, tokens)
+                                }.onFailure {
+                                    subject.sendMessage("An error occurred while executing the command")
+                                    logger.log(Level.SEVERE, "Exception in executing command.", it)
+                                }
                             }
                         }
                     }
