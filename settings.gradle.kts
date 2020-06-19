@@ -1,3 +1,5 @@
 rootProject.name = "Mirai-KC"
 include(":mirai-kc")
-include(":TestingPlugin")
+if (System.getProperty("user.name") == "Karlatemp") {
+    include(":MoRain")
+}
