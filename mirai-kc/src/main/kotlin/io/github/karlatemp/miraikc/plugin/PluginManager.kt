@@ -9,6 +9,9 @@
 package io.github.karlatemp.miraikc.plugin
 
 import io.github.karlatemp.miraikc.*
+import io.github.karlatemp.miraikc.command.Command
+import io.github.karlatemp.miraikc.command.RCommand
+import io.github.karlatemp.miraikc.command.registerCommand
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import java.io.File
@@ -75,6 +78,14 @@ object PluginManager {
                             }
                             if (AutoInitializer::class.java.isAssignableFrom(ks)) {
                                 (ks.instance as AutoInitializer).initialize()
+                            }
+                            ks.getDeclaredAnnotation(RCommand::class.java)?.apply {
+                                if (Command::class.java.isAssignableFrom(ks)) {
+                                    registerCommand(
+                                        name = this.name,
+                                        command = ks.instance as Command
+                                    )
+                                }
                             }
                         }
                     }
