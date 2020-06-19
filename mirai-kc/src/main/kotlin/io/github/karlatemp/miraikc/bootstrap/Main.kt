@@ -5,7 +5,7 @@
  *
  * Mirai-KC/Mirai-KC.mirai-kc.main/Main.kt
  */
-@file:JvmName("Main")
+@file:JvmName("MainKt")
 
 package io.github.karlatemp.miraikc.bootstrap
 
@@ -22,6 +22,11 @@ import java.util.logging.Level
 
 private val loginStorage = File("data/login.json")
 private val rootScope = CoroutineScope(CoroutineThreadPool)
+
+object Main {
+    @JvmStatic
+    fun main(args: Array<String>) = main()
+}
 
 fun main() {
     ConsoleSystem.init()
