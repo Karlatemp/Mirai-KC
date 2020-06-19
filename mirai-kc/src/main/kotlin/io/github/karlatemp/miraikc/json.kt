@@ -6,7 +6,7 @@
  * Mirai-KC/Mirai-KC.mirai-kc.main/json.kt
  */
 
-package io.karlatemp.github.mirai
+package io.github.karlatemp.miraikc
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject

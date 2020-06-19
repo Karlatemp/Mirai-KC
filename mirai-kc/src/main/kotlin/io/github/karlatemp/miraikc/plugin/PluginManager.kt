@@ -6,9 +6,9 @@
  * Mirai-KC/Mirai-KC.main/PluginManager.kt
  */
 
-package io.karlatemp.github.mirai.plugin
+package io.github.karlatemp.miraikc.plugin
 
-import io.karlatemp.github.mirai.*
+import io.github.karlatemp.miraikc.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import java.io.File

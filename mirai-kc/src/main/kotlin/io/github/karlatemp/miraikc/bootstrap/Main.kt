@@ -7,12 +7,12 @@
  */
 @file:JvmName("Main")
 
-package io.karlatemp.github.mirai.bootstrap
+package io.github.karlatemp.miraikc.bootstrap
 
 import com.google.gson.JsonObject
-import io.karlatemp.github.mirai.*
-import io.karlatemp.github.mirai.logging.ConsoleSystem
-import io.karlatemp.github.mirai.logging.initializeLoggingSystem
+import io.github.karlatemp.miraikc.*
+import io.github.karlatemp.miraikc.logging.ConsoleSystem
+import io.github.karlatemp.miraikc.logging.initializeLoggingSystem
 import kotlinx.coroutines.*
 import net.mamoe.mirai.Bot
 import net.mamoe.mirai.join

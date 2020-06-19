@@ -8,7 +8,7 @@
 
 @file:Suppress("FunctionName")
 
-package io.karlatemp.github.mirai.permission
+package io.github.karlatemp.miraikc.permission
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonElement

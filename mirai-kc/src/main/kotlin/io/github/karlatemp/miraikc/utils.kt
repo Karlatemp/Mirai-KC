@@ -6,7 +6,7 @@
  * Mirai-KC/Mirai-KC.main/utils.kt
  */
 
-package io.karlatemp.github.mirai
+package io.github.karlatemp.miraikc
 
 import cn.mcres.karlatemp.mxlib.tools.Unsafe
 import cn.mcres.karlatemp.mxlib.tools.security.AccessToolkit

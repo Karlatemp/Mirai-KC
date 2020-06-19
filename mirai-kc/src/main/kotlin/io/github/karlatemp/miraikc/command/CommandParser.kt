@@ -6,7 +6,7 @@
  * Mirai-KC/Mirai-KC.main/CommandParser.kt
  */
 
-package io.karlatemp.github.mirai.command
+package io.github.karlatemp.miraikc.command
 
 import net.mamoe.mirai.message.data.At
 import net.mamoe.mirai.message.data.Image

@@ -6,9 +6,9 @@
  * Mirai-KC/Mirai-KC.main/MiraiPermissionManager.kt
  */
 
-package io.karlatemp.github.mirai.permission
+package io.github.karlatemp.miraikc.permission
 
-import io.karlatemp.github.mirai.ConsoleUser
+import io.github.karlatemp.miraikc.ConsoleUser
 import net.mamoe.mirai.contact.*
 
 class MiraiContextChecker(

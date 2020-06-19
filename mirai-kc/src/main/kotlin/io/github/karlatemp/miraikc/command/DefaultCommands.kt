@@ -6,10 +6,10 @@
  * Mirai-KC/Mirai-KC.main/DefaultCommands.kt
  */
 
-package io.karlatemp.github.mirai.command
+package io.github.karlatemp.miraikc.command
 
-import io.karlatemp.github.mirai.Bootstrap
-import io.karlatemp.github.mirai.plugin.PluginManager
+import io.github.karlatemp.miraikc.Bootstrap
+import io.github.karlatemp.miraikc.plugin.PluginManager
 import net.mamoe.mirai.contact.Contact
 import net.mamoe.mirai.contact.User
 import net.mamoe.mirai.message.MessageEvent

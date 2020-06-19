@@ -6,9 +6,9 @@
  * Mirai-KC/Mirai-KC.mirai-kc.main/bot.kt
  */
 
-package io.karlatemp.github.mirai
+package io.github.karlatemp.miraikc
 
-import io.karlatemp.github.mirai.logging.toMirai
+import io.github.karlatemp.miraikc.logging.toMirai
 import net.mamoe.mirai.Bot
 import net.mamoe.mirai.utils.BotConfiguration
 import net.mamoe.mirai.utils.SystemDeviceInfo

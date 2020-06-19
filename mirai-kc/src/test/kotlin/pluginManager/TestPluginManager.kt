@@ -8,7 +8,7 @@
 
 package pluginManager
 
-import io.karlatemp.github.mirai.plugin.PluginManager
+import io.github.karlatemp.miraikc.plugin.PluginManager
 import kotlin.system.exitProcess
 
 fun main() {

@@ -6,7 +6,7 @@
  * Mirai-KC/Mirai-KC.main/PermissionManager.kt
  */
 
-package io.karlatemp.github.mirai.permission
+package io.github.karlatemp.miraikc.permission
 
 import java.util.concurrent.ConcurrentLinkedQueue
 import kotlin.coroutines.CoroutineContext

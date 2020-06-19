@@ -8,9 +8,9 @@
 
 package console
 
-import io.karlatemp.github.mirai.Bootstrap
-import io.karlatemp.github.mirai.logging.initializeLoggingSystem
-import io.karlatemp.github.mirai.startupConsoleThread
+import io.github.karlatemp.miraikc.Bootstrap
+import io.github.karlatemp.miraikc.logging.initializeLoggingSystem
+import io.github.karlatemp.miraikc.startupConsoleThread
 
 fun main() {
     initializeLoggingSystem()

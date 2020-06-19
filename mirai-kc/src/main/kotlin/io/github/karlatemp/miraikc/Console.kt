@@ -6,13 +6,13 @@
  * Mirai-KC/Mirai-KC.main/Console.kt
  */
 
-package io.karlatemp.github.mirai
+package io.github.karlatemp.miraikc
 
-import io.karlatemp.github.mirai.command.ArgumentToken
-import io.karlatemp.github.mirai.command.Commands
-import io.karlatemp.github.mirai.logging.ConsoleSystem
-import io.karlatemp.github.mirai.permission.MiraiContextChecker
-import io.karlatemp.github.mirai.permission.Permissible
+import io.github.karlatemp.miraikc.command.ArgumentToken
+import io.github.karlatemp.miraikc.command.Commands
+import io.github.karlatemp.miraikc.logging.ConsoleSystem
+import io.github.karlatemp.miraikc.permission.MiraiContextChecker
+import io.github.karlatemp.miraikc.permission.Permissible
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import net.mamoe.mirai.Bot

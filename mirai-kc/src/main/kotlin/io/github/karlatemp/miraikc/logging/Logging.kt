@@ -6,14 +6,14 @@
  * Mirai-KC/Mirai-KC.mirai-kc.main/Logging.kt
  */
 
-package io.karlatemp.github.mirai.logging
+package io.github.karlatemp.miraikc.logging
 
 import cn.mcres.karlatemp.mxlib.MXBukkitLib
 import cn.mcres.karlatemp.mxlib.logging.*
 import cn.mcres.karlatemp.mxlib.tools.EmptyStream
 import cn.mcres.karlatemp.mxlib.tools.InlinePrintStream
-import io.karlatemp.github.mirai.levelAll
-import io.karlatemp.github.mirai.logger
+import io.github.karlatemp.miraikc.levelAll
+import io.github.karlatemp.miraikc.logger
 import net.mamoe.mirai.Bot
 import net.mamoe.mirai.utils.DefaultLogger
 import net.mamoe.mirai.utils.MiraiLogger

@@ -6,9 +6,9 @@
  * Mirai-KC/Mirai-KC.mirai-kc.main/ConsoleSystem.kt
  */
 
-package io.karlatemp.github.mirai.logging
+package io.github.karlatemp.miraikc.logging
 
-import io.karlatemp.github.mirai.Bootstrap
+import io.github.karlatemp.miraikc.Bootstrap
 import org.jline.reader.LineReaderBuilder
 import org.jline.reader.UserInterruptException
 import org.jline.reader.impl.completer.NullCompleter

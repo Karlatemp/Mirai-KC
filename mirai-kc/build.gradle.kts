@@ -81,7 +81,7 @@ tasks.withType(ShadowJar::class.java) {
             "Implementation-Vendor" to "Karlatemp <karlatemp@vip.qq.com>",
             "Implementation-Title" to project.name.toString(),
             "Implementation-Version" to project.version.toString(),
-            "Main-Class" to "io.karlatemp.github.mirai.bootstrap.Main"
+            "Main-Class" to "io.github.karlatemp.miraikc.bootstrap.Main"
         )
     }
 }

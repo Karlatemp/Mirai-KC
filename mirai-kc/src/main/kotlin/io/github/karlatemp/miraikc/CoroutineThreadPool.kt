@@ -6,7 +6,7 @@
  * Mirai-KC/Mirai-KC.main/CoroutineThreadPool.kt
  */
 
-package io.karlatemp.github.mirai
+package io.github.karlatemp.miraikc
 
 import kotlinx.coroutines.*
 import java.util.concurrent.Executor

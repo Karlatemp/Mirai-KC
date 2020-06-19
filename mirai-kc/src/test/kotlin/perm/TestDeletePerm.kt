@@ -8,7 +8,7 @@
 
 package perm
 
-import io.karlatemp.github.mirai.permission.PermissionManager
+import io.github.karlatemp.miraikc.permission.PermissionManager
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 

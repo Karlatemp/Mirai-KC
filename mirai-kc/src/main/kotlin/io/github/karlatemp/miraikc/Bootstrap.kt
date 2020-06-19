@@ -6,14 +6,14 @@
  * Mirai-KC/Mirai-KC.main/Bootstrap.kt
  */
 
-package io.karlatemp.github.mirai
+package io.github.karlatemp.miraikc
 
-import io.karlatemp.github.mirai.command.ArgumentParser
-import io.karlatemp.github.mirai.command.Commands
-import io.karlatemp.github.mirai.command.DefaultCommands
-import io.karlatemp.github.mirai.permission.MiraiContextChecker
-import io.karlatemp.github.mirai.permission.PermissionManager
-import io.karlatemp.github.mirai.plugin.PluginManager
+import io.github.karlatemp.miraikc.command.ArgumentParser
+import io.github.karlatemp.miraikc.command.Commands
+import io.github.karlatemp.miraikc.command.DefaultCommands
+import io.github.karlatemp.miraikc.permission.MiraiContextChecker
+import io.github.karlatemp.miraikc.permission.PermissionManager
+import io.github.karlatemp.miraikc.plugin.PluginManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

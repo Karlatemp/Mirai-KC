@@ -6,10 +6,10 @@
  * Mirai-KC/Mirai-KC.mirai-kc.main/Perms.kt
  */
 
-package io.karlatemp.github.mirai.command
+package io.github.karlatemp.miraikc.command
 
-import io.karlatemp.github.mirai.Bootstrap
-import io.karlatemp.github.mirai.permission.*
+import io.github.karlatemp.miraikc.Bootstrap
+import io.github.karlatemp.miraikc.permission.*
 import net.mamoe.mirai.contact.Contact
 import net.mamoe.mirai.contact.User
 import net.mamoe.mirai.message.MessageEvent

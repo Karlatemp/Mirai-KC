@@ -6,7 +6,7 @@
  * Mirai-KC/Mirai-KC.main/Commands.kt
  */
 
-package io.karlatemp.github.mirai.command
+package io.github.karlatemp.miraikc.command
 
 import net.mamoe.mirai.contact.Contact
 import net.mamoe.mirai.contact.User

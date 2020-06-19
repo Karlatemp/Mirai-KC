@@ -8,9 +8,9 @@
 
 package perm
 
-import io.karlatemp.github.mirai.permission.GroupNode
-import io.karlatemp.github.mirai.permission.PermNode
-import io.karlatemp.github.mirai.permission.PermissionManager
+import io.github.karlatemp.miraikc.permission.GroupNode
+import io.github.karlatemp.miraikc.permission.PermNode
+import io.github.karlatemp.miraikc.permission.PermissionManager
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 

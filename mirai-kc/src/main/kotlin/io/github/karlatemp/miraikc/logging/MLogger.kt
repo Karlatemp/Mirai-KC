@@ -6,7 +6,7 @@
  * MiraiPlugins/MiraiBootstrap/MLogger.kt
  */
 
-package io.karlatemp.github.mirai.logging
+package io.github.karlatemp.miraikc.logging
 
 import cn.mcres.karlatemp.mxlib.logging.ILogger
 import java.io.PrintStream
