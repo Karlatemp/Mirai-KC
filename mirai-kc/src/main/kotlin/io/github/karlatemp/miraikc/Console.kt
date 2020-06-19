@@ -86,7 +86,6 @@ private val contextChecker = MiraiContextChecker.newContext(
 
 fun startupConsoleThread() {
     thread(name = "Console Input Thread", isDaemon = true) {
-        val jconsole = System.console()
         val scope = CoroutineScope(
             CoroutineThreadPool + contextChecker + ROOTPermissible
         )

@@ -100,7 +100,7 @@ fun initializeLoggingSystem() {
         loggingFile,
         MessageFactoryImpl(),
         object :
-            AlignmentPrefixSupplier(PrefixSupplier { error: Boolean, line: String?, level: Level?, record: LogRecord? ->
+            AlignmentPrefixSupplier(PrefixSupplier { _, line, _, record ->
                 if (record != null) {
                     record.loggerName
                 } else "null"

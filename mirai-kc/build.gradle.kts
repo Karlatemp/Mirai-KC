@@ -15,6 +15,8 @@ repositories {
 }
 
 dependencies {
+    // # https://mvnrepository.com/artifact/io.netty/netty-all
+    implementation("io.netty:netty-all:4.1.50.Final")
     // # https://mvnrepository.com/artifact/org.jline/jline
     implementation("org.jline:jline:3.15.0")
     // # https://mvnrepository.com/artifact/org.fusesource.jansi/jansi
@@ -79,7 +81,7 @@ tasks.withType(ShadowJar::class.java) {
         attributes(
             "Manifest-Version" to "1.0",
             "Implementation-Vendor" to "Karlatemp <karlatemp@vip.qq.com>",
-            "Implementation-Title" to project.name.toString(),
+            "Implementation-Title" to project.name,
             "Implementation-Version" to project.version.toString(),
             "Main-Class" to "io.github.karlatemp.miraikc.bootstrap.Main"
         )
