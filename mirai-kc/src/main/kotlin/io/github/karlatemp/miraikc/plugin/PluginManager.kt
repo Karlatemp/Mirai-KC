@@ -10,6 +10,7 @@ package io.github.karlatemp.miraikc.plugin
 
 import io.github.karlatemp.miraikc.*
 import io.github.karlatemp.miraikc.command.Command
+import io.github.karlatemp.miraikc.command.RAlias
 import io.github.karlatemp.miraikc.command.RCommand
 import io.github.karlatemp.miraikc.command.registerCommand
 import kotlinx.coroutines.CoroutineScope
@@ -79,10 +80,14 @@ object PluginManager {
                             }
                             ks.getDeclaredAnnotation(RCommand::class.java)?.apply {
                                 if (Command::class.java.isAssignableFrom(ks)) {
+                                    val cmd = ks.instance as Command
                                     registerCommand(
                                         name = this.name,
-                                        command = ks.instance as Command
+                                        command = cmd
                                     )
+                                    ks.getDeclaredAnnotation(RAlias::class.java)?.apply {
+                                        alias.forEach { registerCommand(name = it, command = cmd) }
+                                    }
                                 }
                             }
                         }

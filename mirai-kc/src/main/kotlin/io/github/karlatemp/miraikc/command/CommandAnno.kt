@@ -11,3 +11,7 @@ package io.github.karlatemp.miraikc.command
 annotation class RCommand(
     val name: String
 )
+
+annotation class RAlias(
+    vararg val alias: String
+)
