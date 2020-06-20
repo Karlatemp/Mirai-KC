@@ -31,7 +31,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8", "1.3.72"))
     implementation(kotlinx("coroutines-core", "1.3.4"))
     implementation(kotlinx("coroutines-io", "0.1.16"))
-    implementation("org.apache.httpcomponents:httpclient:4.5.12")
+    implementation("org.apache.httpcomponents.client5:httpclient5:5.0.1")
     implementation(rootProject.fileTree("libs").include("*.jar"))
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
