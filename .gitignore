@@ -7,4 +7,7 @@ build/
 /data
 /device.json
 /logging.log
-/MoRain
+
+# 看毛线啊, 这是我自己核心
+/MoRain/src/main/kotlin/io/github/karlatemp/miraikc/core
+
