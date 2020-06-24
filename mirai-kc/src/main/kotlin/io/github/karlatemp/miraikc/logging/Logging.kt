@@ -19,6 +19,7 @@ import net.mamoe.mirai.utils.DefaultLogger
 import net.mamoe.mirai.utils.MiraiLogger
 import net.mamoe.mirai.utils.MiraiLoggerPlatformBase
 import org.fusesource.jansi.Ansi
+import org.slf4j.Marker
 import java.io.IOException
 import java.io.RandomAccessFile
 import java.nio.charset.StandardCharsets
@@ -249,3 +250,251 @@ fun Bot.newLogger(): MiraiLogger {
     return logger.toMirai(initialize = false)
 }
 
+fun Logger.toSLF4j(): org.slf4j.Logger {
+    return object : org.slf4j.Logger {
+        override fun warn(msg: String?) {
+            this@toSLF4j.warning(msg)
+        }
+
+        override fun warn(format: String?, arg: Any?) {
+            this@toSLF4j.log(Level.WARNING, format, arg)
+        }
+
+        override fun warn(format: String?, vararg arguments: Any?) {
+            this@toSLF4j.log(Level.WARNING, format, arguments)
+        }
+
+        override fun warn(format: String?, arg1: Any?, arg2: Any?) {
+            this@toSLF4j.log(Level.WARNING, format, arrayOf(arg1, arg2))
+        }
+
+        override fun warn(msg: String?, t: Throwable?) {
+            this@toSLF4j.log(Level.WARNING, msg, t)
+        }
+
+        override fun warn(marker: Marker?, msg: String?) {
+            warn(msg)
+        }
+
+        override fun warn(marker: Marker?, format: String?, arg: Any?) {
+            warn(format, arg)
+        }
+
+        override fun warn(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
+            warn(format, arg1, arg2)
+        }
+
+        override fun warn(marker: Marker?, format: String?, vararg arguments: Any?) {
+            warn(format, *arguments)
+        }
+
+        override fun warn(marker: Marker?, msg: String?, t: Throwable?) {
+            warn(msg, t)
+        }
+
+        override fun getName(): String {
+            return this@toSLF4j.name
+        }
+
+        override fun info(msg: String?) {
+            this@toSLF4j.log(Level.INFO, msg)
+        }
+
+        override fun info(format: String?, arg: Any?) {
+            this@toSLF4j.log(Level.INFO, format, arg)
+        }
+
+        override fun info(format: String?, arg1: Any?, arg2: Any?) {
+            this@toSLF4j.log(Level.INFO, format, arrayOf(arg1, arg2))
+        }
+
+        override fun info(format: String?, vararg arguments: Any?) {
+            this@toSLF4j.log(Level.INFO, format, arguments)
+        }
+
+        override fun info(msg: String?, t: Throwable?) {
+            this@toSLF4j.log(Level.INFO, msg, t)
+        }
+
+        override fun info(marker: Marker?, msg: String?) {
+            info(msg)
+        }
+
+        override fun info(marker: Marker?, format: String?, arg: Any?) {
+            info(format, arg)
+        }
+
+        override fun info(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
+            info(format, arg1, arg2)
+        }
+
+        override fun info(marker: Marker?, format: String?, vararg arguments: Any?) {
+            info(format, *arguments)
+        }
+
+        override fun info(marker: Marker?, msg: String?, t: Throwable?) {
+            info(msg, t)
+        }
+
+        override fun isErrorEnabled(): Boolean {
+            return true
+        }
+
+        override fun isErrorEnabled(marker: Marker?): Boolean {
+            return true
+        }
+
+        override fun error(msg: String?) {
+            this@toSLF4j.severe(msg)
+        }
+
+        override fun error(format: String?, arg: Any?) {
+            this@toSLF4j.log(Level.SEVERE, format, arg)
+        }
+
+        override fun error(format: String?, arg1: Any?, arg2: Any?) {
+            this@toSLF4j.log(Level.SEVERE, format, arrayOf(arg1, arg2))
+        }
+
+        override fun error(format: String?, vararg arguments: Any?) {
+            this@toSLF4j.log(Level.SEVERE, format, arguments)
+        }
+
+        override fun error(msg: String?, t: Throwable?) {
+            this@toSLF4j.log(Level.SEVERE, msg, t)
+        }
+
+        override fun error(marker: Marker?, msg: String?) {
+            error(msg)
+        }
+
+        override fun error(marker: Marker?, format: String?, arg: Any?) {
+            error(format, arg)
+        }
+
+        override fun error(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
+            error(format, arg1, arg2)
+        }
+
+        override fun error(marker: Marker?, format: String?, vararg arguments: Any?) {
+            error(format, *arguments)
+        }
+
+        override fun error(marker: Marker?, msg: String?, t: Throwable?) {
+            error(msg, t)
+        }
+
+        override fun isDebugEnabled(): Boolean {
+            return true
+        }
+
+        override fun isDebugEnabled(marker: Marker?): Boolean {
+            return true
+        }
+
+        override fun debug(msg: String?) {
+            this@toSLF4j.finer(msg)
+        }
+
+        override fun debug(format: String?, arg: Any?) {
+            this@toSLF4j.log(Level.FINER, format, arg)
+        }
+
+        override fun debug(format: String?, arg1: Any?, arg2: Any?) {
+            this@toSLF4j.log(Level.FINER, format, arrayOf(arg1, arg2))
+        }
+
+        override fun debug(format: String?, vararg arguments: Any?) {
+            this@toSLF4j.log(Level.FINER, format, arguments)
+        }
+
+        override fun debug(msg: String?, t: Throwable?) {
+            this@toSLF4j.log(Level.FINER, msg, t)
+        }
+
+        override fun debug(marker: Marker?, msg: String?) {
+            debug(msg)
+        }
+
+        override fun debug(marker: Marker?, format: String?, arg: Any?) {
+            debug(format, arg)
+        }
+
+        override fun debug(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
+            debug(format, arg1, arg2)
+        }
+
+        override fun debug(marker: Marker?, format: String?, vararg arguments: Any?) {
+            debug(format, *arguments)
+        }
+
+        override fun debug(marker: Marker?, msg: String?, t: Throwable?) {
+            debug(msg, t)
+        }
+
+        override fun isInfoEnabled(): Boolean {
+            return true
+        }
+
+        override fun isInfoEnabled(marker: Marker?): Boolean {
+            return true
+        }
+
+        override fun trace(msg: String?) {
+            this@toSLF4j.log(Level.FINEST, msg)
+        }
+
+        override fun trace(format: String?, arg: Any?) {
+            this@toSLF4j.log(Level.FINEST, format, arg)
+        }
+
+        override fun trace(format: String?, arg1: Any?, arg2: Any?) {
+            this@toSLF4j.log(Level.FINEST, format, arrayOf(arg1, arg2))
+        }
+
+        override fun trace(format: String?, vararg arguments: Any?) {
+            this@toSLF4j.log(Level.FINEST, format, arguments)
+        }
+
+        override fun trace(msg: String?, t: Throwable?) {
+            this@toSLF4j.log(Level.FINEST, msg, t)
+        }
+
+        override fun trace(marker: Marker?, msg: String?) {
+            trace(msg)
+        }
+
+        override fun trace(marker: Marker?, format: String?, arg: Any?) {
+            trace(format, arg)
+        }
+
+        override fun trace(marker: Marker?, format: String?, arg1: Any?, arg2: Any?) {
+            trace(format, arg1, arg2)
+        }
+
+        override fun trace(marker: Marker?, format: String?, vararg argArray: Any?) {
+            trace(format, *argArray)
+        }
+
+        override fun trace(marker: Marker?, msg: String?, t: Throwable?) {
+            trace(msg, t)
+        }
+
+        override fun isWarnEnabled(): Boolean {
+            return true
+        }
+
+        override fun isWarnEnabled(marker: Marker?): Boolean {
+            return true
+        }
+
+        override fun isTraceEnabled(): Boolean {
+            return true
+        }
+
+        override fun isTraceEnabled(marker: Marker?): Boolean {
+            return true
+        }
+
+    }
+}

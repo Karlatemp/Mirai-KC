@@ -19,6 +19,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import net.mamoe.mirai.Bot
+import net.mamoe.mirai.event.broadcast
 import net.mamoe.mirai.event.subscribeAlways
 import net.mamoe.mirai.message.MessageEvent
 import java.io.File
@@ -149,6 +150,9 @@ object Bootstrap {
     fun shutdown() {
         if (!shutdownHook.compareAndSet(false, true)) return
         logger.info("Shut downing")
+        kotlinx.coroutines.runBlocking {
+            ShutdownEvent().broadcast()
+        }
         savePermissionManager()
         PluginManager.disableAll()
         logger.info("Dropping all logon bots")
